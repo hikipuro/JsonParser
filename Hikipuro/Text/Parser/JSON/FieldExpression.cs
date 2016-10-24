@@ -41,7 +41,7 @@ namespace Hikipuro.Text.Parser.JSON {
 				throw new InterpreterException("FieldExpression.Interpret() Error");
 			}
 
-			// 値後のチェック
+			// 値のチェック
 			ValueExpression exp = new ValueExpression();
 			exp.Interpret(context);
 
