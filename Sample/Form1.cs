@@ -16,7 +16,6 @@ namespace JsonParser.Sample {
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void buttonLoadJson_Click(object sender, EventArgs e) {
-
 			// 
 			// Sample/JSON/Test1.json を読み込む
 			// 

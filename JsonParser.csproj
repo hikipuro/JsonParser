@@ -44,6 +44,8 @@
   <ItemGroup>
     <Compile Include="Hikipuro\Text\Parser\JSON\JsonType.cs" />
     <Compile Include="Hikipuro\Text\Parser\JSON\ObjectExpression.cs" />
+    <Compile Include="Hikipuro\Text\Tokenizer\ParseException.cs" />
+    <Compile Include="Hikipuro\Text\Tokenizer\SteppingTokenizer.cs" />
     <Compile Include="Sample\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
