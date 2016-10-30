@@ -34,7 +34,7 @@ namespace Hikipuro.Text.Parser.JSON {
 			// トークンに分解する
 			TokenList<TokenType> tokens = Tokenize(text);
 
-			// Interpreter パターンでパース
+			// パース
 			JsonContext context = new JsonContext(tokens.GetEnumerator());
 			JsonExpression exp = new JsonExpression();
 			exp.Interpret(context);

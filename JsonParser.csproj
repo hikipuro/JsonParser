@@ -42,10 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hikipuro\Text\Parser\JSON\JsonObjectMapper.cs" />
+    <Compile Include="Hikipuro\Text\Parser\JSON\JsonObjectUtility.cs" />
     <Compile Include="Hikipuro\Text\Parser\JSON\JsonType.cs" />
     <Compile Include="Hikipuro\Text\Parser\JSON\ObjectExpression.cs" />
     <Compile Include="Hikipuro\Text\Tokenizer\ParseException.cs" />
     <Compile Include="Hikipuro\Text\Tokenizer\SteppingTokenizer.cs" />
+    <Compile Include="Hikipuro\Text\ToStringBuilder.cs" />
+    <Compile Include="Sample\Data\Glossary.cs" />
+    <Compile Include="Sample\Data\GlossaryData.cs" />
+    <Compile Include="Sample\Data\GlossDef.cs" />
+    <Compile Include="Sample\Data\GlossDiv.cs" />
+    <Compile Include="Sample\Data\GlossEntry.cs" />
+    <Compile Include="Sample\Data\GlossList.cs" />
     <Compile Include="Sample\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +112,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Sample\JSON\Test3.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Sample\JSON\Test4.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -1,10 +1,15 @@
-﻿using System;
+﻿using Hikipuro.Text.Parser.JSON;
+using JsonParser.Sample.Data;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using Hikipuro.Text.Parser.JSON;
 
 namespace JsonParser.Sample {
+	using System.Collections;
+	using JsonParser = Hikipuro.Text.Parser.JSON.JsonParser;
+
 	public partial class Form1 : Form {
 		public Form1() {
 			InitializeComponent();
@@ -23,17 +28,20 @@ namespace JsonParser.Sample {
 			//   http://json.org/example.html
 			// 
 			StreamReader reader = new StreamReader(
-				"Sample/JSON/Test1.json",
+				"Sample/JSON/Test4.json",
 				Encoding.UTF8
 			);
 			string text = reader.ReadToEnd();
 			reader.Close();
 
-			// JSON ファイルをパース (名前空間がかぶってしまったので, フルパスで..)
-			JsonObject json = Hikipuro.Text.Parser.JSON.JsonParser.Parse(text);
+			// JSON ファイルをパース
+			JsonObject json = JsonParser.Parse(text);
 
 			// 画面に表示する
-			textBox.Text = json.ToString();
+			//textBox.Text = json.ToString();
+
+			GlossaryData glossary = json.Map<GlossaryData>();
+			textBox.Text = glossary.ToString();
 		}
 	}
 }

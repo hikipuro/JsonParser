@@ -21,7 +21,7 @@ namespace Hikipuro.Text.Parser.JSON {
 			//Console.WriteLine("ValueExpression.Interpret()");
 
 			// 型に合わせて JsonObject を作成する
-			Token<TokenType> token = context.Next();
+			Token<TokenType> token = context.Current;
 			switch (token.Type) {
 			case TokenType.String:
 				Value = JsonObject.CreateString(token.Text);

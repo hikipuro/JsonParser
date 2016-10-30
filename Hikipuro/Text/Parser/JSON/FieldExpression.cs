@@ -21,7 +21,7 @@ namespace Hikipuro.Text.Parser.JSON {
 			//Console.WriteLine("FieldExpression.Interpret()");
 
 			// 文字列から始まっているかチェック
-			Token<TokenType> token = context.Next();
+			Token<TokenType> token = context.Current;
 			string name = string.Empty;
 			switch (token.Type) {
 			case TokenType.String:
@@ -42,6 +42,7 @@ namespace Hikipuro.Text.Parser.JSON {
 			}
 
 			// 値のチェック
+			token = context.Next();
 			ValueExpression exp = new ValueExpression();
 			exp.Interpret(context);
 

@@ -34,6 +34,12 @@ namespace Hikipuro.Text.Parser.JSON {
 			ArrayList arrayList = new ArrayList();
 			bool loop = true;
 			while (loop) {
+				token = context.Next();
+				if (token.Type == TokenType.CloseBrace) {
+					loop = false;
+					break;
+				}
+
 				FieldExpression exp = new FieldExpression();
 				exp.Interpret(context);
 				arrayList.Add(exp.Value);

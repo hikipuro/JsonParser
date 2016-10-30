@@ -34,6 +34,12 @@ namespace Hikipuro.Text.Parser.JSON {
 			ArrayList arrayList = new ArrayList();
 			bool loop = true;
 			while (loop) {
+				token = context.Next();
+				if (token.Type == TokenType.CloseBracket) {
+					loop = false;
+					break;
+				}
+
 				ValueExpression exp = new ValueExpression();
 				exp.Interpret(context);
 				arrayList.Add(exp.Value);

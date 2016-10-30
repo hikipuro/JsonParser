@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Hikipuro.Text.Parser.JSON {
@@ -35,6 +36,9 @@ namespace Hikipuro.Text.Parser.JSON {
 		/// <param name="value">文字列.</param>
 		/// <returns>JsonObject.</returns>
 		public static JsonObject CreateString(string value) {
+			if (value != null) {
+				value = value.Trim('"');
+			}
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.Type = JsonType.String;
 			jsonObject.Value = value;
@@ -48,9 +52,11 @@ namespace Hikipuro.Text.Parser.JSON {
 		/// <param name="value">数値を表す文字列.</param>
 		/// <returns>JsonObject.</returns>
 		public static JsonObject CreateNumber(string value) {
+			double doubleValue = 0;
+			double.TryParse(value, out doubleValue);
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.Type = JsonType.Number;
-			jsonObject.Value = double.Parse(value);
+			jsonObject.Value = doubleValue;
 			return jsonObject;
 		}
 
@@ -60,9 +66,11 @@ namespace Hikipuro.Text.Parser.JSON {
 		/// <param name="value">文字列で true または false.</param>
 		/// <returns>JsonObject.</returns>
 		public static JsonObject CreateBool(string value) {
+			bool boolValue = false;
+			bool.TryParse(value, out boolValue);
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.Type = JsonType.Bool;
-			jsonObject.Value = bool.Parse(value);
+			jsonObject.Value = boolValue;
 			return jsonObject;
 		}
 
@@ -78,18 +86,45 @@ namespace Hikipuro.Text.Parser.JSON {
 		}
 
 		/// <summary>
-		/// 文字列表現に変換する.
+		/// ドット区切りのパス指定で, JSON 内から値を取得する.
+		/// 例: json.data.text -> "test string"
+		/// {
+		///		"json": {
+		///			"data": {
+		///				"text": "test string"
+		///			}
+		///		}
+		/// }
 		/// </summary>
-		/// <returns></returns>
-		public override string ToString() {
-			return ToString(0);
+		/// <param name="path">ドット区切りのパス.</param>
+		/// <returns>取り出された値.</returns>
+		public object Select(string path) {
+			return JsonObjectUtility.Select(this, path);
+		}
+
+		/// <summary>
+		/// JSON オブジェクトの内容を, 他の型のオブジェクトにマッピングする.
+		/// </summary>
+		/// <typeparam name="T">マッピング対象の型.</typeparam>
+		/// <returns>マッピングされたオブジェクト.</returns>
+		public T Map<T>() where T: new() {
+			JsonObjectMapper mapper = new JsonObjectMapper();
+			return mapper.Map<T>(this);
 		}
 
 		/// <summary>
 		/// 文字列表現に変換する.
 		/// </summary>
-		/// <param name="depth"></param>
-		/// <returns></returns>
+		/// <returns>オブジェクトの文字列表現.</returns>
+		public override string ToString() {
+			return ToString(0);
+		}
+
+		/// <summary>
+		/// 文字列表現に変換する (内部的に使用する).
+		/// </summary>
+		/// <param name="depth">オブジェクトの階層.</param>
+		/// <returns>オブジェクトの文字列表現.</returns>
 		public string ToString(int depth = 0) {
 			StringBuilder stringBuilder = new StringBuilder();
 
